@@ -1,0 +1,118 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Offset for sticky header */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* Custom gradients for circles */
+.green-circle {
+  background-image: linear-gradient(to top right, #15803d, #22c55e);
+}
+
+.blue-circle {
+  background-image: linear-gradient(to top right, #0369a1, #0ea5e9);
+}
+
+.white-circle {
+  background-image: linear-gradient(to top right, #e2e8f0, #ffffff);
+  border: 1px solid #e2e8f0;
+}
+
+/* Simple fade-in animation for elements */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add transition delay for staggered effect */
+.delay-1 { transition-delay: 100ms; }
+.delay-2 { transition-delay: 200ms; }
+.delay-3 { transition-delay: 300ms; }
+.delay-4 { transition-delay: 400ms; }
+.delay-5 { transition-delay: 500ms; }
+.delay-6 { transition-delay: 600ms; }
+
+/* Active nav link style */
+nav a.active {
+  background-color: #0369a1; /* sky-700 */
+  color: white;
+  font-weight: 600;
+}
+
+/* Styling for process steps */
+.step-card {
+  border-left: 4px solid #0ea5e9; /* sky-500 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+}
+
+/* General image styling for responsiveness and spacing */
+main img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Floating Navigation Buttons - Soft Version */
+#floating-nav {
+    position: fixed;
+    bottom: 1rem; /* 16px */
+    right: 1rem;  /* 16px */
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.scroll-btn {
+    background-color: #38bdf8; /* لون هادي - سماوي فاتح */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;  /* أصغر */
+    height: 40px; /* أصغر */
+    font-size: 20px; /* أصغر */
+    cursor: pointer;
+    margin: 4px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* ظل أخف */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.scroll-btn:hover {
+    background-color: #22cce7; /* لون هادي عند التحويم */
+    transform: translateY(-2px); /* حركة بسيطة */
+}
+
+/* --- Responsive Adjustments for Mobile --- */
+@media (max-width: 640px) {
+    /* Reduce padding in the main container for smaller screens */
+    main.p-6 {
+        padding: 1rem; /* 16px */
+    }
+
+    /* Make the materials table horizontally scrollable */
+    #materials .overflow-x-auto {
+        overflow-x: auto;
+    }
+
+    #materials table {
+        min-width: 480px; /* Ensure table has a minimum width to show columns properly */
+    }
+}
