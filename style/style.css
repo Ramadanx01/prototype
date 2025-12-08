@@ -1,0 +1,233 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Offset for sticky header */
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; /* أنيق وواضح */
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* Custom Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* Simple fade-in animation for elements */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add transition delay for staggered effect */
+.delay-1 { transition-delay: 100ms; }
+.delay-2 { transition-delay: 200ms; }
+.delay-3 { transition-delay: 300ms; }
+.delay-4 { transition-delay: 400ms; }
+.delay-5 { transition-delay: 500ms; }
+.delay-6 { transition-delay: 600ms; }
+
+/* General image styling for responsiveness and spacing */
+main img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Floating Navigation Buttons - Colors adjusted to Teal */
+#floating-nav {
+    position: fixed;
+    bottom: 1rem; /* 16px */
+    right: 1rem; /* Adjusted from left for LTR standard */
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.scroll-btn {
+    background-color: #0d9488; /* teal-600 */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 22px; 
+    cursor: pointer;
+    margin: 4px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.scroll-btn:hover {
+    background-color: #0f766e; /* teal-700 */
+    transform: translateY(-2px);
+}
+
+tbody tr:hover {
+  background-color: #d1fae5; /* teal-100 */
+  transition: background-color 0.3s ease;
+}
+
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =============================================== */
+/* Scroll-Triggered Animations & Lazy Loading     */
+/* =============================================== */
+
+/* --- Base Animation Styles (Initial State) --- */
+/* These classes hide the element and prepare it for animation */
+
+.fade-in-up, .zoom-in, .slide-in-left, .slide-in-right, .fade-in {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up {
+    transform: translateY(40px);
+}
+
+.zoom-in {
+    transform: scale(0.9);
+}
+
+.slide-in-left {
+    transform: translateX(-50px);
+}
+
+.slide-in-right {
+    transform: translateX(50px);
+}
+
+/* --- Staggered Animation Delays --- */
+/* Use these classes for a nice sequence effect */
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+.delay-3 { transition-delay: 0.6s; }
+
+
+/* --- Visible State --- */
+/* This class is added by JavaScript to trigger the animation */
+.visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+}
+
+/* --- Lazy Loading Images --- */
+/* Style for images before they are loaded */
+img.lazy {
+    opacity: 0;
+    /* A subtle background and transition for a smooth effect */
+    background-color: #e5e7eb; /* gray-200 */
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* When the image is loaded and becomes 'visible' */
+img.lazy.visible {
+    opacity: 1;
+}
+
+/* =============================================== */
+/* Laboratory Image Carousel - Now a Card Gallery  */
+/* =============================================== */
+
+/* --- Desktop View: Grid Layout (for screens > 768px) --- */
+.carousel-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; /* 24px */
+}
+
+.lab-card {
+    background-color: white;
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    border: 1px solid #e5e7eb; /* gray-200 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lab-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.lab-card-image {
+    width: 100%;
+    height: 300px; 
+    object-fit: contain; 
+}
+
+.lab-card-caption {
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Hide carousel buttons on desktop */
+.carousel-button {
+    display: none;
+}
+
+/* --- Mobile View: Vertical Card Stack Layout (for screens <= 768px) --- */
+@media (max-width: 768px) {
+    .carousel-container {
+        /* Allow content to flow and be scrolled by the main page scroll */
+        overflow: visible; 
+    }
+    .carousel-track {
+        /* Reset from grid/flex to force a vertical block stack */
+        display: block;
+        gap: 0; 
+        transition: none;
+        width: 100%;
+    }
+    .lab-card {
+        /* Ensure cards stack and have proper mobile appearance */
+        width: 100%; 
+        flex: none;
+        margin-bottom: 2rem; /* Add vertical spacing between cards */
+        background-color: white; 
+        border: 1px solid #e5e7eb; 
+        border-radius: 0.75rem; 
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); 
+        padding: 0;
+        box-sizing: border-box; 
+    }
+    .lab-card-image {
+        height: 300px; /* Consistent height for better look */
+        object-fit: contain; 
+        border-radius: 0; 
+        box-shadow: none; 
+        padding: 1rem 1rem 0 1rem; /* Padding to prevent image touching edges */
+    }
+    .lab-card-caption {
+        padding: 1rem; 
+        text-align: center;
+    }
+    .carousel-button {
+        display: none !important; /* Hide navigation buttons completely on mobile */
+    }
+}
