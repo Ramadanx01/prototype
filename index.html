@@ -1,911 +1,570 @@
 <!doctype html>
+
 <html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Composite Material for Industrial Wastewater Purification | ISEF Project</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title data-i18n="meta.title">Mohamad Ramadan | Full Stack Web Developer</title>
+		<meta name="description" content="Practical Full Stack developer focused on building real systems from scratch. Continuous self-learner, comfortable across frontend and backend stacks, with professional experience in JavaScript, PHP, and MySQL." />
+		<meta name="author" content="Mohamad Ramadan">
+		<meta name="keywords" content="Full Stack Developer, Web Developer, PHP, React, JavaScript, MySQL, Laravel, Portfolio">
 
-  <meta name="description" content="A high-efficiency, low-cost composite material from bentonite, zeolite, sawdust, and ZnO for purifying industrial wastewater, developed for the ISEF science fair.">
-  <meta name="keywords" content="wastewater treatment, composite material, bentonite, zeolite, sawdust, ZnO, water purification, ISEF">
+		<!-- Open Graph / WhatsApp / Facebook -->
+		<meta property="og:title" content="Mohamad Ramadan | Full Stack Web Developer" />
+		<meta property="og:description" content="Full Stack Developer building real-world systems using React, PHP, MySQL, and modern web technologies." />
+		<meta property="og:image" content="https://ramadanx01.github.io/FullStack_CV_Portfolio/images/profile2.jpg" />
+		<meta property="og:url" content="https://ramadanx01.github.io/FullStack_CV_Portfolio/" />
+		<meta property="og:type" content="website" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-  <!-- Use an existing image as a favicon to avoid default /favicon.ico 404 in dev servers -->
-  <link rel="icon" href="img/wastewater_purification.png" />
-  <link rel="stylesheet" href="style/style.css" />
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Mohamad Ramadan | Full Stack Web Developer" />
+		<meta name="twitter:description" content="Full Stack Developer building real-world systems using React, PHP, MySQL, and modern web technologies." />
+		<meta name="twitter:image" content="https://ramadanx01.github.io/FullStack_CV_Portfolio/images/profile2.jpg" />
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+		<!-- Favicon -->
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    /* Styling for the active navigation link */
-    .nav-link.active {
-      background-color: #0d9488; /* teal-600 */
-      color: #ffffff; 
-      font-weight: 600;
-    }
-    /* Hover effect improved for navbar links */
-    .nav-link:hover {
-      background-color: #bbf7d0;
-      color: #065f46;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+				darkMode: 'class',
+				theme: {
+					extend: {
+						fontFamily: {
+							sans: ['Cairo', 'Inter', 'ui-sans-serif', 'system-ui'],
+						},
+						colors: {
+							primary: '#0f172a',     // slate-900
+							accent: '#2563eb',      // blue-600
+							accentSoft: '#dbeafe',  // blue-100
+							bgSoft: '#f8fafc'       // slate-50
+						}
+					}
+				}
+			}
+		</script>
 
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+		<link href="assets/rtl.css" rel="stylesheet">
 
-  </style>
+		<style>
+			/* Minimal custom styles for animation control */
+			html { scroll-behavior: smooth; }			
+			.anim {
+				opacity: 0;
+				transform: translateY(20px); /* Less aggressive animation */
+				transition: opacity .6s ease, transform .6s cubic-bezier(.22,.61,.36,1);
+			}
+			.anim.in-view {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			/* Custom class for better certificate image display */
+			.certificate-img {
+				height: 220px;
+				object-fit: cover;
+				border-radius: 12px;
+			}
+			/* Styles for the image preview modal */
+			.modal {
+				position: fixed;
+				z-index: 50;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0,0,0,0.85);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			/* Styles for fixed navigation arrows */
+			.scroll-nav {
+				position: fixed;
+				right: 1rem;
+				bottom: 1rem;
+				z-index: 40;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+			.nav-active { color: #2563eb; } /* accent color */
 
-</head>
-<body class="antialiased bg-gray-50 text-gray-800">
+			/* Loading spinner animation */
+			@keyframes spin {
+				to { transform: rotate(360deg); }
+			}
+			.is-loading { animation: spin 0.8s linear infinite; }
+		</style>
 
-  <div class="max-w-7xl mx-auto">
+	</head>
+	<body class="bg-bgSoft dark:bg-slate-900 text-primary antialiased leading-relaxed">
 
-    <header class="sticky top-0 bg-white/95 backdrop-blur-lg z-50 border-b border-teal-100 shadow-sm">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="flex items-center justify-between h-20">
-          <div class="md:hidden">
-            <button id="mobile-menu-button" class="text-2xl text-gray-700 hover:text-teal-600 focus:outline-none">
-              <i class="ri-menu-line"></i>
-            </button>
-          </div>
+		<header id="main-header" class="sticky top-0 bg-white/80 backdrop-blur z-40 border-b border-slate-100 shadow-sm dark:bg-slate-900/80 dark:border-slate-800 transition-transform duration-300">
+			<div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+				<div class="flex items-center gap-3">
+					<img src="images/profile1.jpg" alt="Profile" class="w-8 h-8 rounded-full object-cover cursor-pointer preview-btn preview-img" />
+					<a href="#hero" class="font-bold text-xl text-accent dark:text-blue-400">Ramadanx01</a>
+				</div>
+				<div class="flex items-center gap-4">
+					<nav class="hidden md:flex gap-6 items-center text-sm font-medium text-slate-700 dark:text-slate-300">
+						<a href="#about" class="hover:text-accent dark:hover:text-blue-400 transition duration-200 nav-link" data-i18n="nav.about">About</a>
+						<a href="#skills" class="hover:text-accent dark:hover:text-blue-400 transition duration-200 nav-link" data-i18n="nav.skills">Skills</a>
+						<a href="#certificates" class="hover:text-accent dark:hover:text-blue-400 transition duration-200 nav-link" data-i18n="nav.certificates">Certificates</a>
+						<a href="#projects" class="hover:text-accent dark:hover:text-blue-400 transition duration-200 nav-link" data-i18n="nav.projects">Projects</a>
+						<a href="#contact" class="hover:text-accent dark:hover:text-blue-400 transition duration-200 nav-link" data-i18n="nav.contact">Contact</a>
+					</nav>
+					<!-- Language Dropdown -->
+					<div class="relative">
+						<button id="lang-toggle-btn" class="p-2 rounded-lg text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open language menu">
+							<i class="ri-translate-2 text-xl"></i>
+						</button>
+						<div id="lang-menu" class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-slate-800 rounded-lg shadow-xl border dark:border-slate-700 p-2 z-50">
+							<button data-lang="en" class="lang-option w-full text-left px-3 py-2 text-sm rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 dark:text-slate-200">English (EN)</button>
+							<button data-lang="ar" class="lang-option w-full text-left px-3 py-2 text-sm rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 dark:text-slate-200">العربية (AR)</button>
+						</div>
+					</div>
 
-          <div class="flex-shrink-0">
-            <a href="#home" class="flex items-center gap-3">
-              <i class="ri-flask-line text-3xl text-teal-600"></i>
-              <span class="font-bold text-xl hidden sm:block text-gray-800">ISEF Water Purification</span>
-            </a>
-          </div>
+					<!-- Theme Toggle -->
+					<button id="theme-toggle" class="p-2 rounded-lg text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle theme">
+						<i class="ri-sun-line text-xl" id="theme-icon-light"></i>
+						<i class="ri-moon-line text-xl hidden" id="theme-icon-dark"></i>
+					</button>
+					<div class="md:hidden">
+						<button id="menuBtn" aria-label="Open menu" class="p-2 rounded-lg text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="ri-menu-3-line text-xl"></i></button>
+					</div>
+				</div>
+			</div>
+		</header>
 
-          <nav id="desktop-nav" class="hidden md:flex items-center gap-1 text-sm font-medium text-gray-600">
-            <a href="#home" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Home</a>
-            <a href="#abstract" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Abstract</a>
-            <a href="#method" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Methodology</a>
-            <a href="#results" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Results</a>
-            <a href="#lab-gallery" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Lab Gallery</a>
-            <a href="#future" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Future Work</a>
-            <a href="#business" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Business Plan</a>
-            <a href="#resources" class="nav-link px-3 py-2 rounded-lg hover:bg-teal-50 transition-colors">Resources</a>
-          </nav>
-        </div>
-      </div>
-    </header>
+		<!-- Mobile Sidebar -->
+		<div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden"></div>
+		<nav id="mobileNav" class="fixed top-0 right-0 h-full w-64 bg-white dark:bg-slate-900 shadow-lg p-5 z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+			<div class="flex justify-between items-center mb-8">
+				<span class="font-bold text-lg text-accent dark:text-blue-400">Menu</span>
+				<button id="closeMenuBtn" aria-label="Close menu" class="p-2 rounded-lg text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="ri-close-line text-xl"></i></button>
+			</div>
+			<a href="#about" class="block p-3 rounded-lg hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800" data-i18n="nav.about">About</a>
+			<a href="#skills" class="block p-3 rounded-lg hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 nav-link" data-i18n="nav.skills">Skills</a>
+			<a href="#certificates" class="block p-3 rounded-lg hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 nav-link" data-i18n="nav.certificates">Certificates</a>
+			<a href="#projects" class="block p-3 rounded-lg hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 nav-link" data-i18n="nav.projects">Projects</a>
+			<a href="#contact" class="block p-3 rounded-lg hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 nav-link" data-i18n="nav.contact">Contact</a>
+		</nav>
 
-    <main class="p-6 sm:p-8 text-gray-700">
-      
-      <section id="home" class="scroll-section text-center py-16">
-        <div class="fade-in-up">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-sky-500">Composite Material from Natural Clays</span><br/>for Purifying Industrial Wastewater
-            </h1>
-            <div class="mt-8 text-lg text-gray-800">
-              <p class="font-semibold">By: <span class="font-bold text-teal-700">Elsaid Elgenedy</span> & <span class="font-bold text-teal-700">Yara Elsayed</span></p>
-            </div>
+		<main class="text-primary" id="main-content">
+			<section id="hero" class="min-h-[85vh] flex items-center bg-white dark:bg-slate-900 text-center md:text-left">
+				<div class="max-w-6xl mx-auto px-6 py-12 grid gap-10 md:grid-cols-2 items-center">
+					
+					<!-- Text Content (always first on mobile, first column on desktop) -->
+					<div class="space-y-6 order-1 anim dark:text-slate-200" data-animate>
+						<p class="text-sm text-accent font-semibold tracking-wider uppercase" data-i18n="hero.jobTitle">Full Stack Web Developer</p>
+						
+						<!-- Container for Image + Name on Mobile -->
+						<div class="flex items-center gap-4 md:block">
+							<figure class="md:hidden w-20 h-20 rounded-full overflow-hidden shadow-lg border-2 border-accent/20 flex-shrink-0 cursor-pointer preview-btn">
+								<img src="images/profile1.jpg" alt="Profile" class="object-cover w-full h-full profile-img preview-img" />
+							</figure>
+							<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary dark:text-white" data-i18n="hero.name">Mohamad Ramadan</h1>
+						</div>
 
-            <p class="mt-4 text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto delay-1 fade-in-up">
-                <span id="typewriter-text" class="font-semibold text-teal-700"></span>
-            </p>
-            
-            <div class="mt-12 max-w-xl mx-auto zoom-in delay-2">
-              <img data-src="img/wastewater_purification.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Diagram illustrating the industrial wastewater purification system" class="lazy rounded-2xl shadow-xl border-4 border-teal-300/50 w-full">
-            </div>
-        </div>
+						<p class="text-slate-700 dark:text-slate-300 max-w-xl" data-i18n="hero.description">Practical Full Stack developer focused on building real systems from scratch. Continuous self-learner, comfortable across frontend and backend stacks, with professional experience in JavaScript, PHP, and MySQL.</p>
 
-        <div class="mt-16 max-w-4xl mx-auto text-left bg-white p-8 rounded-xl shadow-lg border border-teal-100">
-            <h2 class="text-3xl font-bold mb-5 text-teal-700 border-b pb-2">Introduction</h2>
-            <p class="leading-relaxed text-gray-700">
-                Water pollution is a dire global crisis, resulting in approximately 12 million annual deaths. Globally, 5.4 billion cubic meters of industrial wastewater are often disposed of without proper treatment, highlighting the critical need for a high-efficiency, low-cost solution. Our project introduces a novel composite material designed to purify this water. This material is a mixture of natural clays and additives: **Bentonite**, **Sawdust**, **ZnO**, and **Zeolite**. Utilizing the high absorption and adsorption capabilities of the clays, we achieve high removal efficiency comparable to standalone Zeolite and Bentonite, resulting in the removal of most pollutants at a significantly low cost (LE. per liter). This technology offers a viable path to overcome pollution and safely reuse industrial water. <span class="block mt-2 text-xs italic text-gray-500 text-right">[Source Ref: 1, 2, 3]</span>
-            </p>
+						<div class="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
+							<a href="#projects" class="px-6 py-3 bg-accent text-white font-semibold rounded-xl text-sm shadow-lg shadow-accent/30 hover:bg-blue-700 dark:shadow-blue-900/40 transition-colors duration-300 transform hover:scale-[1.02]" data-i18n="hero.viewProjects">View Projects</a>
+							<a href="#contact" class="px-6 py-3 border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 font-semibold rounded-xl text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300" data-i18n="hero.contactMe">Contact Me</a>
+							<button id="download-cv-btn" class="px-4 py-3 border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 rounded-xl text-sm flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300"><i class="ri-download-2-line"></i> <span data-i18n="hero.downloadCV">Download CV</span></button>
+							<a href="https://github.com/Ramadanx01" target="_blank" rel="noopener" class="px-4 py-3 border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 rounded-xl text-sm flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300"><i class="ri-github-line"></i> <span data-i18n="hero.github">GitHub</span></a>
+						</div>
+					</div>
 
-            <h3 class="font-bold text-xl mt-8 mb-4 text-sky-700 border-b pb-2">Composite Material Composition</h3>
-            <div class="overflow-x-auto zoom-in">
-                <table class="min-w-full divide-y divide-gray-200 shadow-md rounded-lg">
-                    <thead class="bg-teal-600 text-white">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-lg">Material</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Function</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tr-lg">Ratio</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Bentonite</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Adsorption (Heavy Metals, Dyes)</td>
-                            <td class="px-6 py-4 whitespace-nowrap">25%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Zeolite</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Adsorption (Ammonia, Cations)</td>
-                            <td class="px-6 py-4 whitespace-nowrap">30%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Sawdust</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Low-Cost Absorbent (Organic Matter)</td>
-                            <td class="px-6 py-4 whitespace-nowrap">40%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Zinc Oxide (ZnO)</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Antimicrobial / Catalysis</td>
-                            <td class="px-6 py-4 whitespace-nowrap">5%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-      </section>
+					<!-- Image Content (always second on mobile, second column on desktop) -->
+					<div class="hidden md:flex justify-center order-2 anim" data-animate>
+						<figure class="w-48 h-48 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl border-4 border-accent/20 flex-shrink-0 cursor-pointer preview-btn" id="hero-image-container">
+							<img src="images/profile1.jpg" alt="Profile" class="object-cover w-full h-full profile-img preview-img" loading="lazy" decoding="async" />
+						</figure>
+					</div>
+				</div>
+			</section>
 
-      <hr class="my-16 border-teal-200" />
+			<section id="about" class="py-20 bg-white dark:bg-slate-900">
+				<div class="max-w-6xl mx-auto px-6">
+					<div class="p-8 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-xl grid md:grid-cols-2 gap-10 bg-bgSoft dark:bg-slate-800/50">
+						<div class="anim" data-animate>
+							<h2 class="text-3xl font-bold text-accent dark:text-blue-400" data-i18n="about.title">About Me</h2>
+							<p class="mt-5 text-slate-700 dark:text-slate-300 leading-relaxed" data-i18n="about.description">I am a Full Stack Web Developer who builds practical systems end-to-end. I enjoy learning, taking concepts from idea to production, and solving real problems with clean, maintainable code. I have hands-on experience with frontend frameworks, backend systems, databases, and local server environments like XAMPP/Apache.</p>
+							<ul class="mt-6 space-y-3 text-sm text-slate-600 dark:text-slate-400 list-inside list-disc">
+								<li data-i18n="about.point1"><strong>Practical experience:</strong> Building systems used in production and real accounting tools.</li>
+								<li data-i18n="about.point2"><strong>Self-learning:</strong> Following modern tools and best practices (React, TypeScript, Laravel).</li>
+								<li data-i18n="about.point3"><strong>Systems mindset:</strong> From UI to database and deployment.</li>
+							</ul>
+						</div>
 
-      <section id="abstract" class="scroll-section max-w-4xl mx-auto py-12">
-        <div class="text-center mb-12 fade-in-up">
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-700">Abstract</h2>
-          <p class="mt-2 text-lg text-gray-600">Addressing the global crisis of water contamination and scarcity.</p>
-        </div>
-        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 fade-in-up delay-1">
-          <p class="leading-relaxed text-lg italic text-gray-800">
-            The world faces a major challenge in water pollution, which impacts every aspect of daily life. Annually, over 12 million people die due to contaminated water. Projections from the WHO suggest that by 2030, 40% of the world's water will be polluted, while 1.7 billion people currently rely on treated wastewater for daily use. To address this, we targeted the 5.4 billion cubic meters of untreated industrial wastewater disposed of annually. Our solution is a novel composite material made from **Bentonite, Zeolite, Sawdust, and Zinc Oxide (ZnO)**, which purifies industrial wastewater with high efficiency, low production cost, and in minimal time. <span class="block mt-2 text-xs italic text-gray-500 text-right">[Source Ref: 2, 4]</span>
-          </p>
-        </div>
-      </section>
+						<div class="grid content-start gap-6 anim dark:text-slate-300" data-animate>
+							<h3 class="text-xl font-semibold border-b pb-2 dark:border-slate-700" data-i18n="about.detailsTitle">Details</h3>
+							<p class="text-base text-slate-700 dark:text-slate-300"><span data-i18n="about.emailLabel">Professional email:</span> <a href="mailto:mrsrm555@gmail.com" class="text-accent dark:text-blue-400 font-medium hover:underline">mrsrm555@gmail.com</a></p>
+							<div class="flex gap-4 mt-2">
+								<a href="https://github.com/Ramadanx01" class="text-slate-700 dark:text-slate-300 hover:text-accent dark:hover:text-blue-400 transition duration-200"><i class="ri-github-fill text-3xl"></i></a>
+								<a href="#certificates" class="text-slate-700 dark:text-slate-300 hover:text-accent dark:hover:text-blue-400 transition duration-200 text-base font-medium self-center" data-i18n="about.viewCertificates">View Certificates</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
-      <hr class="my-16 border-teal-200" />
+			<section id="skills" class="py-20 bg-bgSoft dark:bg-slate-800">
+				<div class="max-w-6xl mx-auto px-6">
+					<h2 class="text-3xl font-bold text-primary dark:text-white mb-8 anim" data-animate data-i18n="skills.title">Skills & Tech Stack</h2>
+					<div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+						<div class="p-8 rounded-2xl bg-white dark:bg-slate-900 shadow-xl hover:shadow-2xl transition duration-300 border border-slate-100 dark:border-slate-800 anim" data-animate>
+							<h4 class="font-bold text-lg text-accent dark:text-blue-400 border-b dark:border-slate-700 pb-2 mb-3" data-i18n="skills.frontend.title">Frontend</h4>
+							<ul class="mt-3 text-base text-slate-700 dark:text-slate-300 space-y-2">
+								<li data-i18n="skills.frontend.item1">HTML, CSS, **JavaScript**</li>
+								<li data-i18n="skills.frontend.item2">Bootstrap, **Tailwind CSS**</li>
+								<li data-i18n="skills.frontend.item3">CSS Animations, Flexbox & Grid</li>
+								<li data-i18n="skills.frontend.item4">**React**, Vite, TypeScript</li>
+							</ul>
+						</div>
+						<div class="p-8 rounded-2xl bg-white dark:bg-slate-900 shadow-xl hover:shadow-2xl transition duration-300 border border-slate-100 dark:border-slate-800 anim" data-animate>
+							<h4 class="font-bold text-lg text-accent dark:text-blue-400 border-b dark:border-slate-700 pb-2 mb-3" data-i18n="skills.backend.title">Backend & Database</h4>
+							<ul class="mt-3 text-base text-slate-700 dark:text-slate-300 space-y-2">
+								<li data-i18n="skills.backend.item1">**PHP**, Node.js</li>
+								<li data-i18n="skills.backend.item2">SQL / **MySQL**</li>
+								<li data-i18n="skills.backend.item3">XAMPP & Apache (local server)</li>
+								<li data-i18n="skills.backend.item4">Currently learning **Laravel**</li>
+							</ul>
+						</div>
+						<div class="p-8 rounded-2xl bg-white dark:bg-slate-900 shadow-xl hover:shadow-2xl transition duration-300 border border-slate-100 dark:border-slate-800 anim" data-animate>
+							<h4 class="font-bold text-lg text-accent dark:text-blue-400 border-b dark:border-slate-700 pb-2 mb-3" data-i18n="skills.tools.title">Tools & Development</h4>
+							<ul class="mt-3 text-base text-slate-700 dark:text-slate-300 space-y-2">
+								<li data-i18n="skills.tools.item1">**Git & GitHub**</li>
+								<li data-i18n="skills.tools.item2">Deployment & Optimization</li>
+								<li data-i18n="skills.tools.item3">Problem-solving & Systems Design</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
 
-      <section id="method" class="scroll-section max-w-5xl mx-auto py-12">
-        <div class="text-center mb-12 fade-in-up">
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-700">Methodology & Procedure</h2>
-          <p class="mt-3 text-lg text-gray-600">A detailed breakdown of the material preparation and purification experiment.</p>
-        </div>
+			<section id="certificates" class="py-20 bg-white dark:bg-slate-900">
+				<div class="max-w-6xl mx-auto px-6">
+					<h2 class="text-3xl font-bold text-primary dark:text-white mb-8 anim" data-animate data-i18n="certificates.title">Certificates & Achievements</h2>
+					<div class="mt-6 flex flex-wrap justify-center gap-8" id="certificates-grid">
+						<article class="bg-bgSoft dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-5 border border-slate-100 dark:border-slate-700 anim flex flex-col" data-animate>
+							<div class="w-full rounded-xl overflow-hidden mb-5 border border-slate-200 dark:border-slate-700 flex justify-center items-center preview-btn cursor-pointer">
+								<img src="images/Certificates/Certificat1.jpg" alt="Robotics Workshop Certificate" class="certificate-img cursor-pointer bg-bgSoft dark:bg-slate-700 preview-img" loading="lazy" decoding="async" />
+							</div>
+							<h4 class="font-bold text-xl text-primary dark:text-white" data-i18n="certificates.cert1.title">Robotics Workshop</h4>
+							<p class="text-sm text-slate-600 dark:text-slate-400 mt-1" data-i18n="certificates.cert1.description">Certificate of participation from Skills Area.</p>
+							<p class="text-xs text-slate-500 mt-2" data-i18n="certificates.cert1.date">Date: 15 / 12 / 2024</p>
+							<button class="mt-auto pt-3 text-sm font-semibold text-accent dark:text-blue-400 hover:underline self-start preview-btn" data-i18n="certificates.view">View Certificate</button>
+						</article>
 
-        <div class="space-y-12">
-          
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-teal-200 fade-in-up">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">Phase 1: Raw Material Preparation</h3>
-            <div class="flex flex-col md:flex-row gap-8 items-start ">
-                <div class="md:w-1/3 slide-in-left">
-                    <img data-src="img/materials_preparation.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Washing Bentonite and Zeolite clays before treatment" class="lazy rounded-lg shadow-md border border-gray-200 mb-4">
-                </div>
-                <div class="md:w-2/3">
-                    <ol class="list-decimal list-inside text-gray-700 space-y-3 pl-5">
-                        <li>**Bentonite & Zeolite:** Wash the raw materials by **distilled water** to ensure the removal of any free impurities, and then allow them to thoroughly dry. <span class="text-xs italic text-gray-500">[Source Ref: 7]</span></li>
-                        <li>**Bentonite Activation:** To improve its adsorption performance, the bentonite is activated by placing it in a **5% Na₂CO₃ solution for 2 hours**, followed by washing it clean.</li>
-                        <li>**Sawdust Sterilization:** The sawdust is washed with **hot water** to remove any color or impurities, then **boiled for 15 minutes** to kill all bacteria present in the material before drying.</li>
-                        <li>**Zinc Oxide (ZnO):** Prepare the zinc oxide solution for later treatment.</li>
-                    </ol>
-                </div>
-            </div>
-          </div>
-          
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-teal-200 fade-in-up delay-1">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">Phase 2: Composite Formation & Treatment</h3>
-            
-            <div class="flex flex-col md:flex-row-reverse items-start gap-8 mb-8 pb-4 border-b border-gray-100 slide-in-right">
-                <div class="md:w-1/3 ">
-                    <img data-src="img/mixing_process.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Mixing process for the composite materials" class="lazy rounded-lg shadow-md border border-gray-200">
-                </div>
-                <div class="md:w-2/3">
-                    <h4 class="font-semibold text-xl mb-2 text-teal-600">2.1 Mixing and Homogenization</h4>
-                    <p class="text-gray-700">Mix the dried materials (25% Bentonite, 30% Zeolite, 40% Sawdust) for **15 minutes** to achieve a homogenous blend. Add **30-60 ml of distilled water** and continue mixing until a consistency similar to wet malleable sand is obtained.</p>
-                </div>
-            </div>
+						<article class="bg-bgSoft dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-5 border border-slate-100 dark:border-slate-700 anim flex flex-col" data-animate>
+							<div class="w-full rounded-xl overflow-hidden mb-5 border border-slate-200 dark:border-slate-700 flex justify-center items-center preview-btn cursor-pointer">
+								<img src="images/Certificates/Certificates2.jpg" alt="ISEF Volunteering Certificate" class="certificate-img cursor-pointer bg-bgSoft dark:bg-slate-700 preview-img" loading="lazy" decoding="async" />
+							</div>
+							<h4 class="font-bold text-xl text-primary dark:text-white" data-i18n="certificates.cert2.title">ISEF Volunteering</h4>
+							<p class="text-sm text-slate-600 dark:text-slate-400 mt-1" data-i18n="certificates.cert2.description">International Science and Engineering Fair.</p>
+							<p class="text-xs text-slate-500 mt-2" data-i18n="certificates.cert2.date">Date: 09 / 12 / 2025</p>
+							<button class="mt-auto pt-3 text-sm font-semibold text-accent dark:text-blue-400 hover:underline self-start preview-btn" data-i18n="certificates.view">View Certificate</button>
+						</article>
+					</div>
+				</div>
+			</section>
 
-            <div class="flex flex-col md:flex-row items-start gap-8 mb-8 pb-4 border-b border-gray-100 slide-in-left">
-                <div class="md:w-1/3 ">
-                    <img data-src="img/ultrasonic_treatment.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Ultrasonic treatment being applied to the ZnO solution" class="lazy rounded-lg shadow-md border border-gray-200">
-                </div>
-                <div class="md:w-2/3">
-                    <h4 class="font-semibold text-xl mb-2 text-teal-600">2.2 Zinc Oxide (ZnO) Treatment</h4>
-                    <p class="text-gray-700">Prepare the **3% ZnO solution in 1% ethanol** and treat it using an **ultrasonicator for 30 minutes**. Submerge the dried material in this solution for 30 minutes with continuous stirring (every 10 minutes), and then filter the mixture. <span class="text-xs italic text-gray-500">[Source Ref: 4, 5]</span></p>
-                </div>
-            </div>
+			<section id="training" class="py-20 bg-bgSoft dark:bg-slate-800">
+				<div class="max-w-6xl mx-auto px-6">
+					<h2 class="text-3xl font-bold text-primary dark:text-white mb-8 anim" data-animate data-i18n="training.title">Training & Professional Experience</h2>
+					<div class="mt-6 flex justify-center">
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-5 border border-slate-100 dark:border-slate-800 anim flex flex-col max-w-sm" data-animate>
+							<div class="w-full rounded-xl overflow-hidden mb-5 border border-slate-200 dark:border-slate-700 flex justify-center items-center preview-btn cursor-pointer">
+								<img src="images/MTEC-Software Company.png" alt="MTEC Software Company Logo" class="certificate-img preview-img" loading="lazy" decoding="async" />
+							</div>
+							<h4 class="font-bold text-xl text-primary dark:text-white" data-i18n="training.mtec.title">Full Stack Training</h4>
+							<p class="text-sm text-slate-600 dark:text-slate-400 mt-1" data-i18n="training.mtec.description">Completed intensive training at MTEC - Software Company.</p>
+							<div class="mt-auto pt-3 flex items-center gap-4">
+								<a href="https://www.facebook.com/profile.php?id=61568788089404" target="_blank" rel="noopener" class="text-sm font-semibold text-accent dark:text-blue-400 hover:underline" data-i18n="training.mtec.viewCompany">
+									View Company <i class="ri-external-link-line ml-1"></i>
+								</a>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
 
-            <div class="flex flex-col md:flex-row-reverse items-start gap-8 slide-in-right">
-                <div class="md:w-1/3 ">
-                    <img data-src="img/drying_oven.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Drying oven used for the final material curing" class="lazy rounded-lg shadow-md border border-gray-200">
-                </div>
-                <div class="md:w-2/3">
-                    <h4 class="font-semibold text-xl mb-2 text-teal-600">2.3 Final Curing and Drying</h4>
-                    <p class="text-gray-700">Finally, dry the ZnO-treated mixture in the oven for **2 hours at 50-80°C**. The composite material is now ready for the purification experiment.</p>
-                </div>
-            </div>
-          </div>
-          
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-teal-200 fade-in-up delay-2">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">Phase 3: Purification and Analysis</h3>
-            
-            <ol class="list-decimal list-inside text-gray-700 space-y-4 pl-5">
-                <li>**Purification:** We use **5 grams of the composite material for each liter** of industrial wastewater. The mixture is allowed to interact for a contact time of **30 minutes**.</li>
-                <li>**Filtration:** After the contact time, the water is separated from the composite material by using a standard **filtration paper**.</li>
-                <li>**Analysis & Measurement:** The purification efficiency is then accurately determined by comparing the levels of pollutants *before* and *after* treatment. The key parameters measured include:
-                    <ul class="list-disc list-inside ml-8 mt-2 text-gray-700 space-y-1 font-medium">
-                        <li>Total Dissolved Solids (**TDS**)</li>
-                        <li>Bacterial colony number</li>
-                        <li>Concentration of **heavy metals**</li>
-                        <li>Concentration of **dyes**</li>
-                    </ul>
-                </li>
-            </ol>
-          </div>
+			<section id="projects" class="py-20 bg-bgSoft dark:bg-slate-800">
+				<div class="max-w-6xl mx-auto px-6">
+					<h2 class="text-3xl font-bold text-primary dark:text-white anim" data-animate data-i18n="projects.title">Selected Projects</h2>
+					<p class="text-base text-slate-600 dark:text-slate-400 mt-3" data-i18n="projects.description">A range of practical systems and web applications, with live demos and source code.</p>
 
-        </div>
-      </section>
-      
-      <hr class="my-16 border-teal-200" />
+					<div id="selected-projects" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim flex flex-col preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/prototype.png" alt="ISEF Prototype 1" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5 flex flex-col flex-grow">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p9.title">ISEF Prototype 1</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p9.description">A prototype for ISEF participants containing scientific material.</p>
+								<p class="text-xs text-red-600 dark:text-red-500 mt-2 font-semibold" data-i18n="projects.p9.disclaimer">© All Rights Reserved. Unauthorized use is prohibited.</p>
+							</div>
+						</article>
 
-      <section id="results" class="scroll-section max-w-5xl mx-auto py-12">
-        <div class="text-center mb-12 fade-in-up">
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-700">Purification Results</h2>
-          <p class="mt-3 text-lg text-gray-600">Visual and data-driven evidence of the material's effectiveness.</p>
-        </div>
-        <div class="space-y-16">
-          <div class="flex flex-col md:flex-row items-center gap-8 ">
-            <div class="md:w-1/2 slide-in-left">
-              <img data-src="img/before_after_water.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Comparison of water before and after purification showing clear visual improvement" class="lazy rounded-lg shadow-lg border border-gray-200">
-            </div>
-            <div class="md:w-1/2 slide-in-right">
-              <h3 class="font-bold text-2xl mb-3 text-sky-700">Clear Visual Improvement (Before and After)</h3>
-              <p class="text-gray-700 leading-relaxed">
-                The purification process results in a dramatic visual change. The treated water is visibly clearer, demonstrating the material's high efficiency in removing suspended solids, dyes, and other visible pollutants from industrial wastewater. This rapid visual change confirms the high efficiency of the adsorption and absorption mechanisms.
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col md:flex-row-reverse items-center gap-8 ">
-            <div class="md:w-1/2 slide-in-right">
-              <img data-src="img/results_comparison.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Chart showing comparison of pollutants before and after treatment" class="lazy rounded-lg shadow-lg border border-gray-200">
-            </div>
-            <div class="md:w-1/2 slide-in-left">
-              <h3 class="font-bold text-2xl mb-3 text-sky-700">Measurable Pollutant Reduction</h3>
-              <p class="text-gray-700 leading-relaxed">
-                Scientific testing confirms significant reductions across all key metrics. Measurements of Total Dissolved Solids (TDS), heavy metal concentrations, dye levels, and bacterial colony counts all show a marked decrease after the treatment period. This data validates the material's effectiveness in comprehensive industrial wastewater treatment.
-              </p>
-            </div>
-          </div>
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-teal-200 fade-in-up mt-12">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">Quantitative Results: Pollutant Removal Efficiency</h3>
-            <p class="text-gray-700 leading-relaxed mb-8">
-              The chart below illustrates the high removal efficiency of the composite material. The data shows a significant reduction in pollutant concentrations after the contact time, confirming the material's effectiveness.
-            </p>
-            <div class="relative h-96 w-full">
-              <canvas id="resultsChart"></canvas>
-            </div>
-            <p class="text-xs italic text-gray-500 mt-4 text-center">
-              *Removal percentages are based on experimental data comparing pollutant levels before and after treatment.
-            </p>
-          </div>
-        </div>
-      </section>
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim flex flex-col preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/prototype2.png" alt="ISEF Prototype 2" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5 flex flex-col flex-grow">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p10.title">ISEF Prototype 2</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p10.description">A second prototype for ISEF participants with a different design approach.</p>
+								<p class="text-xs text-red-600 dark:text-red-500 mt-2 font-semibold" data-i18n="projects.p10.disclaimer">© All Rights Reserved. Unauthorized use is prohibited.</p>
+								<div class="mt-auto pt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/prototype2/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+								</div>
+							</div>
+						</article>
 
-      <hr class="my-16 border-teal-200" />
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/blog.jpg" alt="Electronic Blog" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p1.title">Electronic Blog</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p1.description">A blog built with modern frontend practices.</p>
+								<p class="text-xs text-slate-500 dark:text-slate-500 mt-2" data-i18n="projects.p1.tech">Tech: HTML, CSS, JavaScript</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/blog/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/blog" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
 
-      <section id="detailed-analysis" class="scroll-section max-w-7xl mx-auto py-12">
-        <div class="text-center mb-12 fade-in-up">
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-700 flex items-center justify-center gap-3"><i class="ri-microscope-line"></i> Detailed Heavy Metal Analysis</h2>
-          <p class="mt-3 text-lg text-gray-600">Inorganic Chemistry Laboratory Results for Water Quality.</p>
-        </div>
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/calcoulater.jpg" alt="Wood Calculator System" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p2.title">Wood Calculator System</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p2.description">Calculates wood cubic measurements based on accounting experience.</p>
+								<p class="text-xs text-slate-500 dark:text-slate-500 mt-2" data-i18n="projects.p2.tech">Tech: JavaScript. Convertible to Web App.</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/calcolator-wood/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/calcolator-wood" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
 
-        <div class="bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-teal-200 fade-in-up delay-1">
-          
-          <div class="border-b border-gray-200 pb-4 mb-6">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <div class="flex items-start sm:items-center space-x-4 w-full">
-                <img data-src="img/HCWW.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Holding Company for Water and Wastewater Logo" class="lazy w-16 h-auto">
-                <div>
-                  <h3 class="font-bold text-lg md:text-xl text-gray-800">Holding Company for Water and Wastewater</h3>
-                  <p class="text-sm text-gray-600">Dakahlia Water and Wastewater Company</p>
-                  <p class="text-xs text-gray-500">Laboratories and Quality Sector</p>
-                  <p class="text-xs text-gray-500">Drinking Water Central Laboratory</p>
-                </div>
-              </div>
-              
-              <div class="text-left sm:text-right text-xs space-y-1 flex-shrink-0">
-                <p>Issue No. : <strong>004</strong></p>
-                <p>Issue Date : <strong>May 2019</strong></p>
-                <p>Revision No. : <strong>006</strong></p>
-                <p>Rev. Date. : <strong>April 2023</strong></p>
-              </div>
-            </div>
-          </div>
-          
-          <h4 class="text-lg font-semibold text-sky-700 mb-4 text-center">Appendix 2: Form of coding samples and record the results for Inorganic chemistry laboratory</h4>
-          
-          <div class="flex flex-col sm:flex-row justify-between text-sm font-medium mb-4 border-b pb-2 gap-2">
-            <p>Date : <strong>6/12/2025</strong></p>
-            <p class="hidden md:block">Temperature: Humidity: REP No : <strong>Tested Parameter</strong></p>
-            <p class="hidden md:block">Results</p>
-          </div>
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/coffee_shop.png" alt="Coffee Shop" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p3.title">Coffee Shop Website</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p3.description">Built with HTML, CSS and JavaScript with several animations.</p>
+								<p class="text-xs text-slate-500 dark:text-slate-500 mt-2" data-i18n="projects.p3.tech">Tech: HTML, CSS, JavaScript</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/cofipop/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/cofipop" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
+						
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/learn-frontEnd.jpg" alt="Learn Frontend" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p4.title">Learn Frontend</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p4.description">Early UI-focused learning project.</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/learn-front-end/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/learn-front-end" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
+					</div>
 
-          <div class="overflow-x-auto relative">
-            <div class="md:hidden absolute top-0 left-0 bg-sky-100 text-sky-800 text-xs font-semibold px-2 py-1 rounded-br-lg z-10">
-              <i class="ri-arrow-left-right-line align-middle"></i>
-              <span>اسحب لرؤية باقي الجدول</span>
-            </div>
+					<div id="more-projects" class="hidden mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <table class="min-w-full divide-y divide-gray-300 border border-gray-300">
-              <thead class="bg-teal-600 text-white">
-                <tr>
-                  <th scope="col" rowspan="2" class="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider border-r border-white align-bottom">Sample Number</th>
-                  <th scope="col" rowspan="2" class="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider border-r border-white align-bottom">Sample Type</th>
-                  <th scope="col" rowspan="2" class="px-3 py-3 text-center text-xs font-bold uppercase tracking-wider border-r border-white align-bottom">Units</th>
-                  
-                  <th scope="col" colspan="10" class="px-3 py-2 text-center text-sm font-extrabold uppercase tracking-wider bg-sky-700">Heavy Metals</th>
-                </tr>
-                <tr>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider border-l border-white">Iron</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Manganese</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Copper</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Zinc</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Sodium</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Potassium</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Lead</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Nickel</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Cadmium</th>
-                  <th scope="col" class="px-3 py-2 text-center text-xs font-medium uppercase tracking-wider">Chromium</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white divide-y divide-gray-200 text-xs">
-                <tr class="bg-gray-50">
-                  <td colspan="2" class="px-3 py-2 text-left font-semibold text-gray-700 border-r border-gray-300">* Drinking Water Criteria</td>
-                  <td class="px-3 py-2 text-center font-semibold text-gray-700 border-r border-gray-300">ppm</td>
-                  <td class="px-3 py-2 text-center">0.3</td>
-                  <td class="px-3 py-2 text-center">0.4</td>
-                  <td class="px-3 py-2 text-center">2</td>
-                  <td class="px-3 py-2 text-center">3</td>
-                  <td class="px-3 py-2 text-center">200</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">10</td>
-                  <td class="px-3 py-2 text-center">20</td>
-                  <td class="px-3 py-2 text-center">3</td>
-                  <td class="px-3 py-2 text-center">50</td>
-                </tr>
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/system-wood.png" alt="Wood Management System" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p5.title">Wood Management System</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p5.description">Full JS system to manage wood inventory — strong beginner project.</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/system/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/system" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
 
-                <tr>
-                  <td colspan="2" class="px-3 py-2 text-left font-semibold text-gray-700 border-r border-gray-300">% Uncertainty</td>
-                  <td class="px-3 py-2 text-center font-semibold text-gray-700 border-r border-gray-300">--</td>
-                  <td class="px-3 py-2 text-center">7.54</td>
-                  <td class="px-3 py-2 text-center">3.84</td>
-                  <td class="px-3 py-2 text-center">6.72</td>
-                  <td class="px-3 py-2 text-center">1.65</td>
-                  <td class="px-3 py-2 text-center">8.85</td>
-                  <td class="px-3 py-2 text-center">7.03</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                </tr>
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/todo.jpg" alt="To-Do List" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p6.title">To-Do List App</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p6.description">Shows strong JavaScript fundamentals.</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/To-Do-List/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/To-Do-List" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
 
-                <tr>
-                  <td colspan="2" class="px-3 py-2 text-left font-semibold text-gray-700 border-r border-gray-300">LOD (Limit of Detection)</td>
-                  <td class="px-3 py-2 text-center font-semibold text-gray-700 border-r border-gray-300">ppm</td>
-                  <td class="px-3 py-2 text-center">0.023</td>
-                  <td class="px-3 py-2 text-center">0.04</td>
-                  <td class="px-3 py-2 text-center">0.007</td>
-                  <td class="px-3 py-2 text-center">0.007</td>
-                  <td class="px-3 py-2 text-center">0.02</td>
-                  <td class="px-3 py-2 text-center">0.012</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                </tr>
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/Vikings_Auto_Trade.jpg" alt="Luxury Cars" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p7.title">Luxury Cars Website</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p7.description">Modern landing page design.</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/Viking/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/Viking" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
 
-                <tr>
-                  <td colspan="2" class="px-3 py-2 text-left font-semibold text-gray-700 border-r border-gray-300">LOQ (Limit of Quantitation)</td>
-                  <td class="px-3 py-2 text-center font-semibold text-gray-700 border-r border-gray-300">ppm</td>
-                  <td class="px-3 py-2 text-center">0.15</td>
-                  <td class="px-3 py-2 text-center">0.15</td>
-                  <td class="px-3 py-2 text-center">0.5</td>
-                  <td class="px-3 py-2 text-center">0.5</td>
-                  <td class="px-3 py-2 text-center">5</td>
-                  <td class="px-3 py-2 text-center">1</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                  <td class="px-3 py-2 text-center">--</td>
-                </tr>
-                
-                <tr class="bg-gray-50">
-                  <td colspan="2" class="px-3 py-2 text-left font-semibold text-gray-700 border-r border-gray-300">Method No.</td>
-                  <td class="px-3 py-2 text-center font-semibold text-gray-700 border-r border-gray-300">--</td>
-                  <td class="px-3 py-2 text-center">3111 B</td>
-                  <td class="px-3 py-2 text-center">3111 B</td>
-                  <td class="px-3 py-2 text-center">3111 B</td>
-                  <td class="px-3 py-2 text-center">3111 B</td>
-                  <td class="px-3 py-2 text-center">3500- No B</td>
-                  <td class="px-3 py-2 text-center">3500- K B</td>
-                  <td class="px-3 py-2 text-center">3113 B</td>
-                  <td class="px-3 py-2 text-center">3113 B</td>
-                  <td class="px-3 py-2 text-center">3113 B</td>
-                  <td class="px-3 py-2 text-center">3113 B</td>
-                </tr>
+						<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-lg overflow-hidden border border-slate-100 dark:border-slate-800 transition duration-300 hover:shadow-xl anim preview-btn cursor-pointer" data-animate>
+							<img src="images/projects/juicyland.jpg" alt="Juicyland" class="w-full h-44 object-cover preview-img" loading="lazy" decoding="async" />
+							<div class="p-5">
+								<h4 class="font-bold text-lg text-accent dark:text-blue-400" data-i18n="projects.p8.title">Juicyland (Bootstrap)</h4>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mt-2" data-i18n="projects.p8.description">Early Bootstrap training project.</p>
+								<div class="mt-4 flex gap-3">
+									<a href="https://ramadanx01.github.io/prject1-for-bootstrap/" target="_blank" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition" data-i18n="projects.liveDemo">Live Demo</a>
+									<a href="https://github.com/Ramadanx01/prject1-for-bootstrap" target="_blank" class="px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition" data-i18n="projects.code">Code (GitHub)</a>
+								</div>
+							</div>
+						</article>
+					</div>
 
-                <tr class="bg-blue-100/50">
-                  <td class="px-3 py-2 text-center font-bold text-blue-800 border-r border-gray-300">1</td>
-                  <td class="px-3 py-2 text-center font-bold text-blue-800 border-r border-gray-300">Untreated Water (Control)</td>
-                  <td class="px-3 py-2 text-center font-bold text-blue-800 border-r border-gray-300">ppm</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                  <td class="px-3 py-2 text-center font-semibold text-red-700">50</td>
-                </tr>
+					<div class="mt-10 text-center">
+						<button id="show-more-btn" class="px-6 py-3 border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 font-semibold rounded-xl text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300">Show More</button>
+					</div>
+				</div>
+			</section>
 
-                <tr class="bg-teal-100">
-                  <td class="px-3 py-2 text-center font-bold text-teal-800 border-r border-gray-300">2</td>
-                  <td class="px-3 py-2 text-center font-bold text-teal-800 border-r border-gray-300">Treated Water (B-D-Z-ZnO)</td>
-                  <td class="px-3 py-2 text-center font-bold text-teal-800 border-r border-gray-300">ppm</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">0.5</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">1.7</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">2.9</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">4.5</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">24</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">13</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">9.9</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">19</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">4</td>
-                  <td class="px-3 py-2 text-center font-semibold text-green-700">43</td>
-                </tr>
+			<section id="advanced" class="py-20 bg-white dark:bg-slate-900">
+				<div class="max-w-6xl mx-auto px-6">
+					<h2 class="text-3xl font-bold text-primary dark:text-white anim" data-animate data-i18n="advanced.title">Advanced & Ongoing Projects</h2>
+					<div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+						<article class="bg-bgSoft dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-6 flex flex-col border border-slate-100 dark:border-slate-700 anim" data-animate>
+							<div class="flex-grow">
+								<div class="flex items-center gap-4 mb-4 h-12">
+									<img src="images/projects_backend/korsty.png" alt="Korsaty Logo" class="h-full object-contain" />
+									<h4 class="font-bold text-xl text-primary dark:text-white" data-i18n="advanced.p1.title">Korsaty (Udemy Competitor)</h4>
+								</div>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="advanced.p1.description">A significant PHP-based educational platform, currently in development.</p>
+								<div class="mb-4">
+									<p class="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wider" data-i18n="advanced.techStack">Tech Stack</p>
+									<div class="flex flex-wrap gap-2"><span class="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded-full">PHP</span><span class="text-xs font-medium bg-orange-100 text-orange-800 px-2 py-1 rounded-full">MySQL</span></div>
+								</div>
+							</div>
+							<a href="https://github.com/Ramadanx01/Korsaty" target="_blank" rel="noopener" class="mt-auto inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition"><i class="ri-github-line"></i> <span data-i18n="advanced.viewOnGithub">View on GitHub</span></a>
+						</article>
+						<article class="bg-bgSoft dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-6 flex flex-col border border-slate-100 dark:border-slate-700 anim" data-animate>
+							<div class="flex-grow">
+								<div class="flex items-center gap-4 mb-4 h-12">
+									<img src="images/projects_backend/sab3awy.png" alt="Sab3awy Logo" class="h-full object-contain" />
+									<h4 class="font-bold text-xl text-primary dark:text-white" data-i18n="advanced.p2.title">Sab3awy Clothing System</h4>
+								</div>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="advanced.p2.description">A full management system undergoing migration to a modern React & Laravel stack.</p>
+								<div class="mb-4">
+									<p class="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wider" data-i18n="advanced.techStack">Tech Stack</p>
+									<div class="flex flex-wrap gap-2"><span class="text-xs font-medium bg-sky-100 text-sky-800 px-2 py-1 rounded-full">React</span><span class="text-xs font-medium bg-red-100 text-red-800 px-2 py-1 rounded-full">Laravel</span></div>
+								</div>
+							</div>
+							<a href="https://github.com/Ramadanx01/sab3awy" target="_blank" rel="noopener" class="mt-auto inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition"><i class="ri-github-line"></i> <span data-i18n="advanced.viewOnGithub">View on GitHub</span></a>
+						</article>
+						<article class="bg-bgSoft dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-6 flex flex-col border border-slate-100 dark:border-slate-700 anim" data-animate>
+							<div class="flex-grow">
+								<div class="flex items-center gap-2 mb-4">
+									<div class="w-8 h-8 bg-red-600 rounded-md flex items-center justify-center flex-shrink-0"><span class="text-white font-bold text-xl">W</span></div>
+									<span class="text-red-600 font-bold text-2xl">asel</span>
+								</div>
+								<p class="text-sm text-slate-600 dark:text-slate-400 mb-4" data-i18n="advanced.p3.description">A professional project showcasing commercial-level development work for M-Tech.</p>
+								<div class="mb-4">
+									<p class="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wider" data-i18n="advanced.techStack">Tech Stack</p>
+									<div class="flex flex-wrap gap-2"><span class="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded-full">PHP</span><span class="text-xs font-medium bg-orange-100 text-orange-800 px-2 py-1 rounded-full">SQL</span><span class="text-xs font-medium bg-green-100 text-green-800 px-2 py-1 rounded-full">Node.js</span></div>
+								</div>
+							</div>
+							<a href="https://github.com/Ramadanx01/Wasel_website" target="_blank" rel="noopener" class="mt-auto inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 text-sm rounded-lg bg-primary dark:bg-slate-700 text-white hover:bg-slate-700 dark:hover:bg-slate-600 transition"><i class="ri-github-line"></i> <span data-i18n="advanced.viewOnGithub">View on GitHub</span></a>
+						</article>
+					</div>
+				</div>
+			</section>
 
-                <tr>
-                    <td colspan="13" class="px-3 py-2 text-left font-bold text-gray-900">Analytical Chem.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          
-          <p class="mt-4 text-xs italic text-gray-500">* Drinking water Criteria: Standard specifications for drinking water according to Ministry of health and population No. 458 / 2007.</p>
+			<section id="future" class="py-20 bg-bgSoft dark:bg-slate-800">
+				<div class="max-w-6xl mx-auto px-6">
+					<h2 class="text-3xl font-bold text-primary dark:text-white anim" data-animate data-i18n="future.title">Future Development Path</h2>
+					<ul class="mt-6 space-y-3 text-lg text-slate-700 dark:text-slate-300 anim list-disc list-inside" data-animate>
+						<li data-i18n="future.point1">Deep dive into Cyber Security principles and practices.</li>
+						<li data-i18n="future.point2">Advanced understanding of Networking & Internet Systems architecture.</li>
+					</ul>
+				</div>
+			</section>
 
-        </div>
-      </section>
-
-      <hr class="my-16 border-teal-200" /> 
-
-      <section id="lab-gallery" class="scroll-section py-12">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-teal-700">🧪 In the Laboratory: Step-by-Step</h2>
-          <p class="text-lg text-gray-600 mt-2">Visual steps of the wastewater treatment experiment using the composite material.</p>
-        </div>
-
-        <!-- Laboratory Image Carousel -->
-        <div class="carousel-container relative w-full max-w-6xl mx-auto">
-            <ul class="carousel-track">
-                <!-- Card 1 -->
-                <li class="lab-card"><img src="img/In_the_laboratory/composite-material-added.jpg" alt="Step 1: Material Addition" class="lab-card-image"><div class="lab-card-caption"><h3 class="font-bold text-sky-700">Step 1: Material Addition</h3><p class="text-sm mt-1">**5 grams of the composite material** are accurately added to the industrial wastewater sample.</p></div></li>
-                <!-- Card 2 -->
-                <li class="lab-card"><img src="img/In_the_laboratory/water-with-material-start.jpg" alt="Step 2: Initial Contact" class="lab-card-image"><div class="lab-card-caption"><h3 class="font-bold text-sky-700">Step 2: Initial Contact</h3><p class="text-sm mt-1">The water sample at the beginning of the treatment phase, showing the turbid industrial water mixed with the composite.</p></div></li>
-                <!-- Card 3 -->
-                <li class="lab-card"><img src="img/In_the_laboratory/water-after-material-30min.jpg" alt="Step 3: Contact Time (30 Min)" class="lab-card-image"><div class="lab-card-caption"><h3 class="font-bold text-sky-700">Step 3: Contact Time (30 Min)</h3><p class="text-sm mt-1">The same sample after the designated contact time, showing clear evidence of pollutant coagulation.</p></div></li>
-                <!-- Card 4 -->
-                <li class="lab-card"><img src="img/In_the_laboratory/removing-material-from-water.jpg" alt="Step 4: Material Removal" class="lab-card-image"><div class="lab-card-caption"><h3 class="font-bold text-sky-700">Step 4: Material Removal</h3><p class="text-sm mt-1">The composite material is carefully removed from the water using standard laboratory filtration techniques.</p></div></li>
-                <!-- Card 5 -->
-                <li class="lab-card"><img src="img/In_the_laboratory/filtered-water.jpg" alt="Step 5: Final Clear Water" class="lab-card-image"><div class="lab-card-caption"><h3 class="font-bold text-sky-700">Step 5: Final Clear Water</h3><p class="text-sm mt-1">The final product: visibly clear water, ready for analytical testing.</p></div></li>
-                <!-- Card 6 -->
-                <li class="lab-card"><img src="img/In_the_laboratory/water-sample-before-after.jpg" alt="Step 6: Visual Confirmation" class="lab-card-image"><div class="lab-card-caption"><h3 class="font-bold text-sky-700">Step 6: Visual Confirmation</h3><p class="text-sm mt-1">A direct comparison between the raw wastewater (left) and the purified water (right).</p></div></li>
-            </ul>
-
-            <!-- Navigation Buttons -->
-            <button class="carousel-button carousel-button--left">
-                <i class="ri-arrow-left-s-line text-3xl text-gray-700"></i>
-            </button>
-            <button class="carousel-button carousel-button--right">
-                <i class="ri-arrow-right-s-line text-3xl text-gray-700"></i>
-            </button>
-        </div>
-      </section>
-      <hr class="my-16 border-teal-200" />
-
-      <section id="future" class="scroll-section max-w-5xl mx-auto py-12">
-        <div class="text-center mb-12 fade-in-up">
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-700">Future Work & Global Impact</h2>
-          <p class="mt-3 text-lg text-gray-600">The roadmap for developing the material and expanding its application.</p>
-        </div>
-        <div class="flex flex-col md:flex-row items-center gap-8 ">
-            <div class="md:w-1/2 zoom-in">
-              <img data-src="img/future_work.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Illustration representing future goals and improvements for the project" class="lazy rounded-lg shadow-lg border border-gray-200">
-            </div>
-            <div class="md:w-1/2 bg-teal-50 p-8 rounded-2xl shadow-xl border border-teal-300 fade-in-up">
-              <ul class="list-disc list-inside text-gray-800 space-y-4 font-medium pl-5">
-                <li>**Recycling:** Develop a process to recycle the material, ensuring the same purification quality for multiple uses, enhancing cost-effectiveness and sustainability.</li>
-                <li>**International Standards:** Improve the material's efficiency across all pollutant types (heavy metals, dyes, bacteria, organic waste) to meet **international drinking water standards**.</li>
-                <li>**Surface Area:** Increase the composite's surface area to achieve even higher and faster removal efficiency of wastes.</li>
-                <li>**Performance Optimization:** Enhance the purification time and overall material performance, making it highly effective in a shorter contact period.</li>
-                <li>**New Applications:** Expand the material's use to include the treatment of **agricultural wastewater**, tackling a major source of non-point source pollution.</li>
-              </ul>
-            </div>
-        </div>
-      </section>
-      
-      <hr class="my-16 border-teal-200" />
-
-      <section id="business" class="scroll-section max-w-6xl mx-auto py-12">
-        <div class="text-center mb-16 fade-in-up">
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-700">Business Model & Strategy</h2>
-          <p class="mt-3 text-lg text-gray-600">An overview of our strategic plan, market analysis, and financial structure.</p>
-        </div>
-
-        <div class="space-y-16">
-
-          <!-- Business Model Canvas Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Customer Segments -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 slide-in-left">
-              <h3 class="font-bold text-xl text-sky-700 flex items-center gap-3 mb-4"><i class="ri-user-search-line text-2xl"></i>Customer Segments</h3>
-              <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Water treatment companies</li>
-                <li>Industrial factories</li>
-                <li>Water analysis laboratories</li>
-                <li>Agricultural farm owners</li>
-              </ul>
-            </div>
-
-            <!-- Value Proposition -->
-            <div class="bg-teal-50 p-6 rounded-xl shadow-lg border border-teal-200 md:col-span-2 fade-in-up">
-              <h3 class="font-bold text-xl text-teal-800 flex items-center gap-3 mb-4"><i class="ri-medal-line text-2xl"></i>Value Proposition</h3>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                  <p class="text-2xl font-bold text-teal-600">90%+</p><p class="text-sm">High Efficiency</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                  <p class="text-2xl font-bold text-teal-600">~4 LE/L</p><p class="text-sm">Low Cost</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                  <p class="text-2xl font-bold text-teal-600">~30 min</p><p class="text-sm">Little Time</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                  <p class="text-2xl font-bold text-teal-600">Safe</p><p class="text-sm">No Negative Impact</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                  <p class="text-2xl font-bold text-teal-600">Eco-Friendly</p><p class="text-sm">Sustainable</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Channels -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 fade-in-up">
-              <h3 class="font-bold text-xl text-sky-700 flex items-center gap-3 mb-4"><i class="ri-truck-line text-2xl"></i>Channels</h3>
-              <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Official Website & E-commerce</li>
-                <li>Direct Sales (B2B)</li>
-                <li>Distributor Networks</li>
-                <li>Digital Marketing & Ads</li>
-              </ul>
-            </div>
-            
-            <!-- Customer Relationships -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 slide-in-left">
-              <h3 class="font-bold text-xl text-sky-700 flex items-center gap-3 mb-4"><i class="ri-customer-service-2-line text-2xl"></i>Customer Relationships</h3>
-              <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Technical support & training</li>
-                <li>Regular communication for feedback</li>
-                <li>Dedicated after-sales service</li>
-              </ul>
-            </div>
-
-            <!-- Revenue Streams -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 slide-in-right">
-              <h3 class="font-bold text-xl text-sky-700 flex items-center gap-3 mb-4"><i class="ri-cash-line text-2xl"></i>Revenue Streams</h3>
-              <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Direct sales of the material (B2B)</li>
-                <li>Subscription models for regular supply</li>
-                <li>Sales of consumer-grade filters (B2C)</li>
-                <li>Certified purification services</li>
-              </ul>
-            </div>
-
-            <!-- Key Resources -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 slide-in-right">
-              <h3 class="font-bold text-xl text-sky-700 flex items-center gap-3 mb-4"><i class="ri-tools-line text-2xl"></i>Key Resources</h3>
-                <ul class="list-disc list-inside text-gray-700 space-y-2">
-                  <li>**Raw Materials:** Bentonite, Zeolite, Sawdust, ZnO</li>
-                  <li>**Physical:** Production line, pH Meter, etc.</li>
-                  <li>**Human:** Technical team, Customer Service</li>
-                  <li>**Financial:** Bank account</li>
-                </ul>
-              </div>
-
-            <!-- Key Activities -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 fade-in-up">
-              <h3 class="font-bold text-xl text-sky-700 flex items-center gap-3 mb-4"><i class="ri-settings-3-line text-2xl"></i>Key Activities</h3>
-              <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Production & Quality Control</li>
-                <li>Marketing and Sales</li>
-                <li>Order Management & After-sales service</li>
-                <li>Continuous R&D to improve efficiency</li>
-              </ul>
-            </div>
-
-            <!-- Key Partnerships -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 slide-in-left">
-              <h3 class="font-bold text-xl text-sky-700 flex items-center gap-3 mb-4"><i class="ri-group-2-line text-2xl"></i>Key Partnerships</h3>
-              <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Holding Companies</li>
-                <li>Raw materials suppliers</li>
-                <li>Packaging & Distribution companies</li>
-                <li>Environment & sustainability organizations</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Cost Structure -->
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 fade-in-up">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">Cost Structure</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h4 class="font-semibold text-lg text-gray-800 mb-2">Fixed Costs</h4>
-                <ul class="list-disc list-inside space-y-1 text-gray-700">
-                  <li>Equipment Cost: <span class="font-mono text-gray-900">7,000 LE</span></li>
-                  <li>Production Line: <span class="font-mono text-gray-900">10,000 LE</span></li>
-                  <li>Salaries: <span class="font-mono text-gray-900">10,000 LE</span></li>
-                  <li>Insurance: <span class="font-mono text-gray-900">1,500 LE</span></li>
-                  <li>Application Development: <span class="font-mono text-gray-900">10,000 LE</span></li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-semibold text-lg text-gray-800 mb-2">Variable Costs (per unit/period)</h4>
-                <ul class="list-disc list-inside space-y-1 text-gray-700">
-                  <li>Raw Materials (Bentonite: 150, Zeolite: 300, ZnO: 400, Sawdust: 10 LE/Kg)</li>
-                  <li>Electricity: <span class="font-mono text-gray-900">2,000 LE</span></li>
-                  <li>Packaging: <span class="font-mono text-gray-900">2,500 LE</span></li>
-                  <li>Shipping & Distribution: <span class="font-mono text-gray-900">3,500 LE</span></li>
-                  <li>Marketing: <span class="font-mono text-gray-900">4,000 LE</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Competitor Analysis -->
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 fade-in-up">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">Competitor Analysis</h3>
-            <div class="overflow-x-auto">
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-100">
-                  <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Method</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Price</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Quality/Efficiency</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Time</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                  <tr class="bg-teal-50">
-                    <td class="px-6 py-4 font-bold text-teal-800">Our Material</td>
-                    <td class="px-6 py-4 font-medium text-green-600">Low</td>
-                    <td class="px-6 py-4 font-medium text-green-600">High</td>
-                    <td class="px-6 py-4 font-medium text-green-600">Fast (~30 min)</td>
-                  </tr>
-                  <tr>
-                    <td class="px-6 py-4">Catalysis</td>
-                    <td class="px-6 py-4 text-red-600">High</td>
-                    <td class="px-6 py-4 text-orange-600">Lower</td>
-                    <td class="px-6 py-4 text-red-600">Slow (0.5-2 days)</td>
-                  </tr>
-                  <tr>
-                    <td class="px-6 py-4">Absorption (e.g., Activated Carbon)</td>
-                    <td class="px-6 py-4 text-red-600">High</td>
-                    <td class="px-6 py-4 text-orange-600">Lower</td>
-                    <td class="px-6 py-4 text-orange-600">Moderate</td>
-                  </tr>
-                  <tr>
-                    <td class="px-6 py-4">Biota Bacteria</td>
-                    <td class="px-6 py-4">Varies</td>
-                    <td class="px-6 py-4">Varies</td>
-                    <td class="px-6 py-4 text-red-600">Very Slow (5-9 hours)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Market Size -->
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 fade-in-up">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">Our Material Market</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div class="p-6 bg-sky-50 rounded-lg border border-sky-200">
-                <h4 class="text-lg font-semibold text-sky-800">Total Available Market (TAM)</h4>
-                <p class="text-4xl font-bold text-sky-600 mt-2">346B $</p>
-                <p class="text-sm text-gray-600 mt-1">Global Market</p>
-              </div>
-              <div class="p-6 bg-teal-50 rounded-lg border border-teal-200">
-                <h4 class="text-lg font-semibold text-teal-800">Serviceable Available Market (SAM)</h4>
-                <p class="text-4xl font-bold text-teal-600 mt-2">18B $</p>
-                <p class="text-sm text-gray-600 mt-1">Market in Egypt</p>
-              </div>
-              <div class="p-6 bg-orange-50 rounded-lg border border-orange-200">
-                <h4 class="text-lg font-semibold text-orange-800">Serviceable Obtainable Market (SOM)</h4>
-                <p class="text-4xl font-bold text-orange-600 mt-2">17.7M $</p>
-                <p class="text-sm text-gray-600 mt-1">Targetable Market Share</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- SWOT Analysis -->
-          <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 fade-in-up">
-            <h3 class="font-bold text-2xl mb-5 text-sky-700 border-b pb-3">SWOT Analysis</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <!-- Strengths -->
-              <div class="bg-green-50 p-4 rounded-lg border border-green-200">
-                <h4 class="font-bold text-lg text-green-800 flex items-center gap-2"><i class="ri-thumb-up-line"></i>Strengths</h4>
-                <ul class="list-disc list-inside text-green-700 mt-2 pl-2"><li>High efficiency (90%) & Low cost (~4 LE/L)</li><li>Little time (~30 min)</li><li>Eco-friendly solution</li></ul>
-              </div>
-              <!-- Weaknesses -->
-              <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                <h4 class="font-bold text-lg text-yellow-800 flex items-center gap-2"><i class="ri-thumb-down-line"></i>Weaknesses</h4>
-                <ul class="list-disc list-inside text-yellow-700 mt-2 pl-2"><li>Need for initial financial support</li></ul>
-              </div>
-              <!-- Opportunities -->
-              <div class="bg-sky-50 p-4 rounded-lg border border-sky-200">
-                <h4 class="font-bold text-lg text-sky-800 flex items-center gap-2"><i class="ri-lightbulb-flash-line"></i>Opportunities</h4>
-                <ul class="list-disc list-inside text-sky-700 mt-2 pl-2"><li>Increasing population and water demand</li><li>Growing awareness of water pollution</li></ul>
-              </div>
-              <!-- Threats -->
-              <div class="bg-red-50 p-4 rounded-lg border border-red-200">
-                <h4 class="font-bold text-lg text-red-800 flex items-center gap-2"><i class="ri-shield-alert-line"></i>Threats</h4>
-                <ul class="list-disc list-inside text-red-700 mt-2 pl-2"><li>Poor economic conditions affecting investment</li></ul>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section id="resources" class="scroll-section max-w-5xl mx-auto py-12">
-        <div class="text-center mb-12 fade-in-up">
-          <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-700">References & Resources</h1>
-          <p class="mt-3 text-lg text-gray-600">Scholarly articles supporting the material's components and treatment method.</p>
-        </div>
-        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 fade-in-up delay-1 text-left">
-          <ul class="space-y-4 text-gray-700 text-sm md:text-base list-decimal list-outside pl-5">
-            <li class="pl-2">
-              <a href="https://doi.org/10.1007/s11356-022-24347-5" target="_blank" rel="noopener noreferrer" class="text-sky-700 hover:underline">
-                Dhar, A. K., Himu, H. A., Bhattacharjee, M., Mostufa, M. G., & Parvin, F. (2023). Insights on applications of bentonite clays for the removal of dyes and heavy metals from wastewater: a review. <em>Environmental Science and Pollution Research, 30</em>(3), 5440–5474.
-              </a>
-            </li>
-            <li class="pl-2">
-              <a href="https://www.phindia.com/Books/BookDetail/Industrial-Wastewater-Treatment" target="_blank" rel="noopener noreferrer" class="text-sky-700 hover:underline">
-                Patwardhan, A. D. (2017). <em>Industrial wastewater treatment</em>. PHI Learning Pvt. Ltd.
-              </a>
-            </li>
-            <li class="pl-2">
-              <a href="https://doi.org/10.1007/978-3-662-05111-4_24" target="_blank" rel="noopener noreferrer" class="text-sky-700 hover:underline">
-                Wong, P. K., & Chu, L. M. (2003). Industrial wastewater treatment. In <em>Microbial Biotechnology: Principles And Applications</em> (pp. 591–624). Springer.
-              </a>
-            </li>
-            <li class="pl-2">
-              <a href="https://doi.org/10.1088/1757-899X/863/1/012037" target="_blank" rel="noopener noreferrer" class="text-sky-700 hover:underline">
-                Muzaffar, S., Aslam, M. N., Rehman, S., Umer, S., Ahmed, S., Zahra, S. R., … & Anwar, H. (2020, May). A simple and low-cost purification method for microbial-free water using zinc oxide nanoparticles. In <em>IOP Conference Series: Materials Science and Engineering, 863</em>(1), 012037. IOP Publishing.
-              </a>
-            </li>
-            <li class="pl-2">
-              <a href="https://doi.org/10.3390/ma14164747" target="_blank" rel="noopener noreferrer" class="text-sky-700 hover:underline">
-                Spoială, A., Ilie, C. I., Trușcă, R. D., Oprea, O. C., Surdu, V. A., Vasile, B. Ș., … & Dițu, L. M. (2021). Zinc oxide nanoparticles for water purification. <em>Materials, 14</em>(16), 4747.
-              </a>
-            </li>
-            <li class="pl-2">
-              <a href="https://doi.org/10.1007/978-1-4614-5428-7_5" target="_blank" rel="noopener noreferrer" class="text-sky-700 hover:underline">
-                Margeta, K. Z. N., Siljeg, M., & Farkas, A. (2013). Natural zeolites in water treatment: How effective is their use. In Elshorbagy, W., & Chowdhury, R. (Eds.), <em>Water Treatment</em> (pp. 81–112). Springer.
-              </a>
-            </li>
-            <li class="pl-2">
-              <a href="https://doi.org/10.1016/j.clay.2015.12.016" target="_blank" rel="noopener noreferrer" class="text-sky-700 hover:underline">
-                Gong, Z., Liao, L., Lv, G., & Wang, X. (2016). A simple method for physical purification of bentonite. <em>Applied Clay Science, 119</em>, 294–300.
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+			<section id="contact" class="py-20 bg-white dark:bg-slate-900">
+				<div class="max-w-3xl mx-auto px-6 text-center">
+					<h2 class="text-3xl font-bold text-primary dark:text-white anim" data-animate data-i18n="contact.title">Get In Touch</h2>
+					<p class="text-base text-slate-600 dark:text-slate-400 mt-3 anim" data-animate data-i18n="contact.description">I am open to new opportunities and freelance inquiries. Send a message or connect via the links below.</p>
 
 
-    </main>
+					<!-- Simplified Contact Buttons -->
+					<div class="mt-10 flex flex-wrap justify-center gap-4 anim" data-animate>
+						<a href="mailto:mrsrm555@gmail.com" class="w-full sm:w-auto px-8 py-4 bg-accent text-white font-semibold rounded-xl text-base shadow-lg shadow-accent/30 hover:bg-blue-700 dark:shadow-blue-900/40 transition-colors duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-2">
+							<i class="ri-mail-send-line"></i> <span data-i18n="contact.emailDirectly">Email Me Directly</span>
+						</a>
+						<a href="https://github.com/Ramadanx01" target="_blank" rel="noopener" class="w-full sm:w-auto px-8 py-4 border border-slate-300 dark:border-slate-600 text-primary dark:text-slate-200 font-semibold rounded-xl text-base hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300 flex items-center justify-center gap-2">
+							<i class="ri-github-line"></i> <span data-i18n="contact.github">GitHub Profile</span>
+						</a>
+					</div>
+				</div>
+			</section>
 
-    <footer class="text-center text-sm text-gray-500 py-8 border-t border-teal-200">
-      <p>ISEF International Science and Engineering Fair Project.</p>
-      <p class="text-xs mt-2 opacity-75">Developed by Mohamed Ramadan</p>
+			<footer class="py-10 text-center text-sm text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800" data-i18n="footer.text">© <span id="year"></span> Mohamad Ramadan — Full Stack Web Developer</footer>
+		</main>
 
-      <p class="text-xs mt-4 opacity-60">
-        © All Rights Reserved. Any unauthorized copying, reproduction, or use of this project
-        — in whole or in part — is strictly prohibited and may result in legal action.
-        This work is protected under intellectual property laws.
-      </p>
-    </footer>
-  </div>
-  
-  <div id="mobile-menu" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
-    <nav class="w-64 bg-white h-full shadow-lg p-6 text-left">
-      <a href="#home" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600 border-b">Home</a>
-      <a href="#abstract" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600 border-b">Abstract</a>
-      <a href="#method" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600 border-b">Methodology</a>
-      <a href="#results" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600 border-b">Results</a>
-      <a href="#lab-gallery" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600 border-b">Lab Gallery</a>
-      <a href="#future" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600 border-b">Future Work</a>
-      <a href="#business" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600 border-b">Business Plan</a>
-      <a href="#resources" class="mobile-nav-link block py-3 text-lg text-gray-700 hover:text-teal-600">Resources</a>
-    </nav>
-  </div>
+		<!-- Scroll Navigation Arrows -->
+		<div class="scroll-nav">
+			<button id="scrollUp" aria-label="Scroll Up" class="w-12 h-12 rounded-full bg-accent/80 dark:bg-blue-500/80 text-white shadow-lg hover:bg-accent dark:hover:bg-blue-500 transition backdrop-blur-sm"><i class="ri-arrow-up-s-line text-2xl"></i></button>
+			<button id="scrollDown" aria-label="Scroll Down" class="w-12 h-12 rounded-full bg-accent/80 dark:bg-blue-500/80 text-white shadow-lg hover:bg-accent dark:hover:bg-blue-500 transition backdrop-blur-sm"><i class="ri-arrow-down-s-line text-2xl"></i></button>
+		</div>
 
-  <div id="floating-nav">
-      <a href="#" id="scroll-up" class="scroll-btn" title="Previous Section"><i class="ri-arrow-up-line"></i></a>
-      <a href="#" id="scroll-down" class="scroll-btn" title="Next Section"><i class="ri-arrow-down-line"></i></a>
-  </div>
-  
-  <script src="js/main.js?v=5"></script>
-  
-  <script>
-    // Activation of the typewriter effect
-    document.addEventListener('DOMContentLoaded', () => {
-        // Typewriter Effect
-        new Typed('#typewriter-text', {
-            strings: [
-                "An innovative, highly efficient, and low-cost solution for industrial wastewater.", 
-                "A mixture of bentonite, sawdust, ZnO, and zeolite.",
-                "High efficiency and low cost for water purification."
-            ],
-            typeSpeed: 40,
-            backSpeed: 20,
-            loop: true,
-            showCursor: true,
-            cursorChar: '|',
-        });
-        
-        // Active link scroll observer (This block ensures the Nav links are highlighted correctly)
-        window.addEventListener('scroll', () => {
-          const sections = document.querySelectorAll('section[id]');
-          // Increased offset (200) to account for the sticky header height and better scroll position detection
-          const scrollPos = window.scrollY + 200; 
-          
-          sections.forEach(sec => {
-            const top = sec.offsetTop;
-            const bottom = top + sec.offsetHeight;
-            const navLinks = document.querySelectorAll(`nav a[href="#${sec.id}"]`);
-            
-            navLinks.forEach(link => {
-                // Check if the current scroll position is within the section bounds
-                if (scrollPos >= top && scrollPos <= bottom) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-          });
-        });
+		<!-- Generic Alert Modal -->
+		<div id="alertModal" class="modal hidden" role="dialog" aria-modal="true">
+			<div class="relative bg-white dark:bg-slate-800 w-11/12 max-w-md m-auto rounded-2xl shadow-xl p-6 sm:p-8 text-center" id="alertModalContent">
+				<h3 id="alertModalTitle" class="text-xl font-bold text-primary dark:text-white" data-i18n="modal.cvTitle">CV</h3>
+				<p id="alertModalBody" class="text-slate-600 dark:text-slate-300 mt-4" data-i18n="hero.cvAlert">The CV is not available for download at the moment. It will be uploaded soon.</p>
+				<button id="alertModalClose" class="mt-6 w-full sm:w-auto px-8 py-3 bg-accent text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors duration-300" data-i18n="modal.close">Close</button>
+			</div>
+		</div>
 
-        // Chart.js - Results Chart
-        const ctx = document.getElementById('resultsChart').getContext('2d');
-        const resultsChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Total Dissolved Solids (TDS)', 'Heavy Metals', 'Dyes', 'Bacteria'],
-                datasets: [{
-                    label: 'Removal Efficiency (%)',
-                    data: [92, 90, 88, 88], // Example data
-                    backgroundColor: [
-                        'rgba(13, 148, 136, 0.6)', // teal-600
-                        'rgba(14, 165, 233, 0.6)', // sky-500
-                        'rgba(59, 130, 246, 0.6)', // blue-500
-                        'rgba(249, 115, 22, 0.6)'  // orange-500
-                    ],
-                    borderColor: [
-                        'rgba(13, 148, 136, 1)',
-                        'rgba(14, 165, 233, 1)',
-                        'rgba(59, 130, 246, 1)',
-                        'rgba(249, 115, 22, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true, max: 100, ticks: { callback: (value) => value + '%' } } },
-                plugins: { legend: { display: false }, title: { display: true, text: 'Pollutant Removal Efficiency', font: { size: 16 } } }
-            }
-        });
-    });
-  </script>
-</body>
+		<!-- Image Preview Modal -->
+		<div id="imageModal" class="modal hidden" role="dialog" aria-modal="true">
+			<div class="relative p-4" id="imageModalContent">
+				<img id="modalImage" src="" alt="Certificate Preview" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl" />
+			</div>
+		</div>
 
+		<script src="assets/main.js"></script>
+		<script src="assets/i18n.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				document.getElementById('year').textContent = new Date().getFullYear();
+
+				// CV Download Modal Logic
+				const downloadBtn = document.getElementById('download-cv-btn');
+				const alertModal = document.getElementById('alertModal');
+				const alertModalCloseBtn = document.getElementById('alertModalClose');
+				const alertModalContent = document.getElementById('alertModalContent');
+
+				downloadBtn.addEventListener('click', () => {
+					alertModal.classList.remove('hidden');
+					document.body.style.overflow = 'hidden';
+				});
+
+				const closeModal = () => {
+					alertModal.classList.add('hidden');
+					document.body.style.overflow = '';
+				};
+
+				alertModalCloseBtn.addEventListener('click', closeModal);
+				alertModal.addEventListener('click', (e) => {
+					if (!alertModalContent.contains(e.target)) {
+						closeModal();
+					}
+				});
+			});
+		</script>
+	</body>
 </html>
